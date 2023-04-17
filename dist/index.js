@@ -199,6 +199,7 @@ try {
             console.log(`Adding insteadOf entries in git config for ${key}`);
             child_process.execSync(`git config --global url."git@http.${mapping.pseudoHost}:${mapping.owner}/${mapping.repo}".insteadOf "https://${mapping.host}/${mapping.owner}/${mapping.repo}"`);
             child_process.execSync(`git config --global url."git@ssh.${mapping.pseudoHost}:${mapping.owner}/${mapping.repo}".insteadOf "git@${mapping.host}:${mapping.owner}/${mapping.repo}"`);
+            child_process.execSync(`git config --global url."git@ssh.${mapping.pseudoHost}:${mapping.owner}/${mapping.repo}".insteadOf "ssh://git@${mapping.host}:${mapping.owner}/${mapping.repo}"`);
         });
     }
 
