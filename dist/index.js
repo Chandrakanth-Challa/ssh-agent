@@ -80,8 +80,6 @@ module.exports = require("os");
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
 "use strict";
-    
-import * as fs from 'fs';
 
 // For internal use, subject to change.
 var __importStar = (this && this.__importStar) || function (mod) {
