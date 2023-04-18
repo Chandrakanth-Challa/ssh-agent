@@ -221,9 +221,8 @@ try {
 
             // Since we can't specify hostname/user/host options in a ssh-add call...
             // Write the key to a file
-            var fs = require('fs');
             fs.writeFileSync(`${homeSsh}/${keyFile}`, key.replace("\r\n", "\n").trim() + "\n", { mode: '600' });
-            const sshConfig_contents = readFileSync(sshConfig, 'utf-8');
+            const sshConfig_contents = fs.readFileSync(sshConfig, 'utf-8');
             // Update ssh config
             let hostEntry = `\nHost http.${mapping.pseudoHost}\n`
                           + `    HostName ${mapping.host}\n`
