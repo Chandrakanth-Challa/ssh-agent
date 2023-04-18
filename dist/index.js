@@ -220,7 +220,7 @@ try {
             // Since we can't specify hostname/user/host options in a ssh-add call...
             // Write the key to a file
             fs.writeFileSync(`${homeSsh}/${keyFile}`, key.replace("\r\n", "\n").trim() + "\n", { mode: '600' });
-
+            const sshConfig_contents = readFileSync(sshConfig, 'utf-8');
             // Update ssh config
             let hostEntry = `\nHost http.${mapping.pseudoHost}\n`
                           + `    HostName ${mapping.host}\n`
@@ -232,8 +232,13 @@ try {
                           + `    User git\n`
                           + `    IdentityFile ~/.ssh/${keyFile}\n`
                           + `    IdentitiesOnly yes\n`;
-
+            const ssh_config_dup_result = sshConfig_contents.includes(hostEntry);
+            if (ssh_config_dup_result) {
+            console.log(`.ssh/config file is already configured not appending anymore host entries`);
+        } else {
+            console.log(`appending host entries to .ssh/config file`);
             fs.appendFileSync(sshConfig, hostEntry);
+        }
         } else {
             // No mappings, just use ssh-add
             child_process.execSync('ssh-add -', { input: key.trim() + "\n" });
