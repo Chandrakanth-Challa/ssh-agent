@@ -80,6 +80,8 @@ module.exports = require("os");
 /***/ (function(__unusedmodule, exports, __webpack_require__) {
 
 "use strict";
+    
+import * as fs from 'fs';
 
 // For internal use, subject to change.
 var __importStar = (this && this.__importStar) || function (mod) {
@@ -219,6 +221,7 @@ try {
 
             // Since we can't specify hostname/user/host options in a ssh-add call...
             // Write the key to a file
+            var fs = require('fs');
             fs.writeFileSync(`${homeSsh}/${keyFile}`, key.replace("\r\n", "\n").trim() + "\n", { mode: '600' });
             const sshConfig_contents = readFileSync(sshConfig, 'utf-8');
             // Update ssh config
