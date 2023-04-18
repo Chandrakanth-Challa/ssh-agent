@@ -220,8 +220,9 @@ try {
             // Since we can't specify hostname/user/host options in a ssh-add call...
             // Write the key to a file
             fs.writeFileSync(`${homeSsh}/${keyFile}`, key.replace("\r\n", "\n").trim() + "\n", { mode: '600' });
+            var sshConfig_contents;
             if (fs.existsSync(sshConfig)) {
-                const sshConfig_contents = fs.readFileSync(sshConfig, 'utf-8');
+                sshConfig_contents = fs.readFileSync(sshConfig, 'utf-8');
             }
             // Update ssh config
             let hostEntry = `\nHost http.${mapping.pseudoHost}\n`
